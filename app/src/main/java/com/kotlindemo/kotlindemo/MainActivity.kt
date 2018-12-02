@@ -10,14 +10,22 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     lateinit var btnClick: Button
+    lateinit var btnFragment: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         println("Hello, world!")
+
         btnClick = findViewById<Button>(R.id.btnClick)
+        btnFragment = findViewById<Button>(R.id.btnFragment)
+
         btnClick.setOnClickListener {
             showToast(timeNow())
+        }
+        btnFragment.setOnClickListener {
+            fragmentManager.beginTransaction().add(R.id.parent, HomeFragment(), "")
+                    .addToBackStack("").commit()
         }
     }
 
@@ -39,5 +47,12 @@ class MainActivity : AppCompatActivity() {
         val simpleDateFormat = SimpleDateFormat("hh:mm aa",
                 Locale.getDefault())
         return simpleDateFormat.format(Date())
+    }
+
+    override fun onBackPressed() {
+        //If there is a fragment in backstack, pop it. Else finish the activity.
+        if (!fragmentManager.popBackStackImmediate()) {
+            super.onBackPressed()
+        }
     }
 }
