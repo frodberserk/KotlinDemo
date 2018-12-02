@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
      *
      *@param message The message to display as toast.
      */
-    private fun showToast(message: String) {
+    fun showToast(message: String) {
         Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
     }
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
      *
      * @return Current time in a formatted string.
      */
-    private fun timeNow(): String {
+    fun timeNow(): String {
         val simpleDateFormat = SimpleDateFormat("hh:mm aa",
                 Locale.getDefault())
         return simpleDateFormat.format(Date())
